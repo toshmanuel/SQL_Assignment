@@ -61,17 +61,22 @@ order by rev_stars;
 -- Write a query in SQL to find the name of all reviewers who have rated their ratings with a NULL
 -- value
 
-select distinct rev_stars, mov_title
-from rating, movie
+select distinct rev_name, rev_stars
+from rating, reviewer
 where rev_stars is null
-order by rev_stars;
+and
+rating.rev_id = reviewer.rev_id;
 
 -- Question 10
 -- Write a query in SQL to find the name of movie and director (first and last names) who directed a
 -- movie that casted a role for 'Eyes Wide Shut'.
 
-select mov_title, dir_fname, dir_lname
-from
-movie, director
+select mov_title, dir_fname, dir_lname, director.dir_id
+from 
+movie, director, movie_direction
 where
-mov_title = 'Eyes Wide Shut';
+mov_title = 'Eyes Wide Shut'
+and
+movie_direction.dir_id = director.dir_id
+and 
+movie_direction.mov_id = movie.mov_id;
