@@ -36,7 +36,11 @@
 -- list
 
   select rev_name, mov_title 
-  from reviewer, movie;
+  from reviewer, movie, rating
+  where
+  rating.mov_id = movie.mov_id
+  and
+  rating.rev_id = reviewer.rev_id;
   
 -- Question 7 
 -- Write a query in SQL to find the name of all reviewers who have rated 7 or more stars to their rating
